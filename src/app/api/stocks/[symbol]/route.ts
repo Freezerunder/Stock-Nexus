@@ -3,10 +3,11 @@ import { getStockData } from '@/lib/api';
 
 export async function GET(
   request: Request,
-  { params }: { params: { symbol: string } }
+  { params }: { params: Promise<{ symbol: string }> }
 ) {
   try {
-    const symbol = params.symbol.toUpperCase();
+    const { symbol: symbolParam } = await params;
+    const symbol = symbolParam.toUpperCase();
     const data = await getStockData(symbol);
     return NextResponse.json(data);
   } catch (error) {
