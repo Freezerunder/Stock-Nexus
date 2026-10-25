@@ -19,9 +19,9 @@ const BASELINE_MARKET_DATA: Record<string, { price: number; volatility: number }
   'ADBE': { price: 550.00, volatility: 2.5 },
   'PYPL': { price: 65.00, volatility: 3.5 },
   'SBUX': { price: 95.00, volatility: 2.0 },
-  'Uber': { price: 70.00, volatility: 4.0 },
-  'Airbnb': { price: 140.00, volatility: 4.0 },
-  'Shopify': { price: 80.00, volatility: 5.0 },
+  'UBER': { price: 70.00, volatility: 4.0 },
+  'ABNB': { price: 140.00, volatility: 4.0 },
+  'SHOP': { price: 80.00, volatility: 5.0 },
 
   // Finance & Payments
   'V': { price: 270.00, volatility: 1.5 },
@@ -125,107 +125,6 @@ export async function getStockData(symbol: string) {
   const fullName = stockNames[upperSymbol] || 'Market Asset';
   const baseline = BASELINE_MARKET_DATA[upperSymbol] || { price: 100, volatility: 3 };
 
-  const fluctuation = (Math.random() - 0.5) * baseline.volatility;
-  const currentPrice = baseline.price + fluctuation;
-  const change = fluctuation;
-  const changePercent = (fluctuation / baseline.price) * 100;
-
-  return {
-    symbol: upperSymbol,
-    name: fullName,
-    price: currentPrice.toFixed(2),
-    change: change.toFixed(2),
-    changePercent: changePercent.toFixed(2) + '%',
-    volume: Math.floor(Math.random() * 50000000).toLocaleString(),
-    high: (currentPrice + Math.random()).toFixed(2),
-    low: (currentPrice - Math.random()).toFixed(2),
-    timestamp: new Date().toISOString(),
-  };
-}
-
-export async function getStockNews(symbol: string) {
-  const upperSymbol = symbol.toUpperCase();
-  const fullName = stockNames[upperSymbol] || upperSymbol;
-
-  const newsItems = [
-    { id: 1, title: `${fullName} announces quarterly earnings beating expectations`, sentiment: 'positive', source: 'Reuters', time: '2h ago' },
-    { id: 2, title: `Market analysts debate the future valuation of ${fullName}`, sentiment: 'neutral', source: 'Bloomberg', time: '5h ago' },
-    { id: 3, title: `New regulatory headwinds could impact ${fullName} operations`, sentiment: 'negative', source: 'Financial Times', time: '12h ago' },
-    { id: 4, title: `${fullName} expands its partnership with AI leader`, sentiment: 'positive', source: 'CNBC', time: '1d ago' },
-  ];
-
-  return newsItems;
-}
-
-  'PYPL': { price: 65.00, volatility: 3.5 },
-  'JPM': { price: 210.00, volatility: 1.2 },
-  'BAC': { price: 38.00, volatility: 1.2 },
-  'GS': { price: 480.00, volatility: 2.0 },
-  'WMT': { price: 65.00, volatility: 1.0 },
-  'TGT': { price: 150.00, volatility: 2.0 },
-  'SBUX': { price: 95.00, volatility: 2.0 },
-  'COST': { price: 850.00, volatility: 1.5 },
-  'NKE': { price: 110.00, volatility: 3.0 },
-  'XOM': { price: 115.00, volatility: 2.0 },
-  'CVX': { price: 155.00, volatility: 2.0 },
-  'F': { price: 12.00, volatility: 4.0 },
-  'GM': { price: 45.00, volatility: 4.0 },
-  'BTC': { price: 65000.00, volatility: 8.0 },
-  'ETH': { price: 3500.00, volatility: 7.0 },
-  'SOL': { price: 150.00, volatility: 10.0 },
-  'BNB': { price: 600.00, volatility: 6.0 },
-  'BABA': { price: 80.00, volatility: 4.0 },
-  'TCEHY': { price: 40.00, volatility: 3.5 },
-  'SONY': { price: 90.00, volatility: 2.5 },
-  'SAP': { price: 200.00, volatility: 2.0 },
-};
-
-const stockNames: Record<string, string> = {
-  'AAPL': 'Apple Inc.',
-  'TSLA': 'Tesla, Inc.',
-  'NVDA': 'NVIDIA Corporation',
-  'MSFT': 'Microsoft Corporation',
-  'GOOGL': 'Alphabet Inc.',
-  'AMZN': 'Amazon.com, Inc.',
-  'META': 'Meta Platforms, Inc.',
-  'AMD': 'Advanced Micro Devices',
-  'NFLX': 'Netflix, Inc.',
-  'INTC': 'Intel Corporation',
-  'ORCL': 'Oracle Corporation',
-  'CSCO': 'Cisco Systems, Inc.',
-  'CRM': 'Salesforce, Inc.',
-  'ADBE': 'Adobe Inc.',
-  'V': 'Visa Inc.',
-  'MA': 'Mastercard Incorporated',
-  'PYPL': 'PayPal Holdings, Inc.',
-  'JPM': 'JPMorgan Chase & Co.',
-  'BAC': 'Bank of America Corp.',
-  'GS': 'Goldman Sachs Group',
-  'WMT': 'Walmart Inc.',
-  'TGT': 'Target Corporation',
-  'SBUX': 'Starbucks Corporation',
-  'COST': 'Costco Wholesale',
-  'NKE': 'Nike, Inc.',
-  'XOM': 'Exxon Mobil Corporation',
-  'CVX': 'Chevron Corporation',
-  'F': 'Ford Motor Company',
-  'GM': 'General Motors Company',
-  'BTC': 'Bitcoin',
-  'ETH': 'Ethereum',
-  'SOL': 'Solana',
-  'BNB': 'Binance Coin',
-  'BABA': 'Alibaba Group Holding',
-  'TCEHY': 'Tencent Holdings',
-  'SONY': 'Sony Group Corporation',
-  'SAP': 'SAP SE',
-};
-
-export async function getStockData(symbol: string) {
-  const upperSymbol = symbol.toUpperCase();
-  const fullName = stockNames[upperSymbol] || 'Market Asset';
-  const baseline = BASELINE_MARKET_DATA[upperSymbol] || { price: 100, volatility: 3 };
-
-  // Simulate real-time fluctuation around the baseline
   const fluctuation = (Math.random() - 0.5) * baseline.volatility;
   const currentPrice = baseline.price + fluctuation;
   const change = fluctuation;
